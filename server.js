@@ -4,7 +4,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),
 const port=Number(process.env.PORT||3000),root=__dirname;
 const uxDir=process.env.DATA_DIR||path.join(root,'private-data');const uxFile=path.join(uxDir,'ux-responses.jsonl');
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8'};
-const reply=(res,status,data,contentType='application/json; charset=utf-8')=>{res.writeHead(status,{'Content-Type':contentType,'X-Content-Type-Options':'nosniff'});res.end(typeof data==='string'?data:JSON.stringify(data))};
+const reply=(res,status,data,contentType='application/json; charset=utf-8')=>{res.writeHead(status,{'Content-Type':contentType,'X-Content-Type-Options':'nosniff'});res.end(Buffer.isBuffer(data)||typeof data==='string'?data:JSON.stringify(data))};
 const readBody=async(req,max=1600)=>{let raw='';for await(const chunk of req){raw+=chunk;if(Buffer.byteLength(raw)>max)throw Error('Dados excedem o limite')}return JSON.parse(raw)};
 const csvCell=value=>{let s=String(value??'');if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'};
 const authOk=(req)=>{const secret=process.env.RESEARCHER_TOKEN||'';const candidate=(req.headers.authorization||'').replace(/^Bearer /,'');if(secret.length<16||candidate.length!==secret.length)return false;return crypto.timingSafeEqual(Buffer.from(candidate),Buffer.from(secret))};
