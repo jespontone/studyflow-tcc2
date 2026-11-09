@@ -1,0 +1,18 @@
+/* V18: planejamento com confirmação explícita */
+.study-plan-area{margin-top:22px;display:grid;gap:14px}
+.study-plan-area .plan-header{background:linear-gradient(115deg,#e4eeff,#fff2d4);color:#14234b}
+.study-plan-area .plan-header p{margin-top:6px;color:#4a5b7a}
+.study-plan-area .availability-line{max-width:900px}
+.study-plan-area .proposal-list{margin:14px 0}
+.study-plan-area .proposal-line{padding:12px 16px;border:1px solid var(--line,#dfe6f4);border-radius:12px;margin-bottom:8px}
+.schedule-manager{margin-top:18px}
+.managed-session{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--line,#dfe6f4)}
+.managed-session:last-child{border:0}
+.managed-session strong,.managed-session small{display:block}
+.managed-session small{margin-top:4px;color:var(--muted,#79849b)}
+.managed-actions{display:flex;gap:8px;flex-shrink:0}
+.managed-actions .btn{padding:7px 12px}
+.study-plan-area #confirmSchedule:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:650px){.managed-session{align-items:flex-start;flex-direction:column}.managed-actions{width:100%}}
+html[data-mode="dark"] .study-plan-area .plan-header{background:linear-gradient(110deg,#293b64,#4a3953);color:#fff}
+html[data-mode="dark"] .study-plan-area .plan-header p{color:#e3e8ff}

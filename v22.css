@@ -1,0 +1,9 @@
+/* V22: bloco de avaliação em fluxo normal, sem sobreposição */
+#assessment .assessment-form-card { margin-bottom:18px; border:1px solid var(--line,#dbe3f2); padding:30px; }
+#assessment .assessment-form-card h3 { margin:0 0 10px; }
+#assessment .assessment-form-card > p { margin:0; line-height:1.65; }
+#assessment .assessment-form-actions { display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:20px; }
+#assessment #googleFormLink { position:static; transform:none; display:inline-flex; align-items:center; justify-content:center; width:auto; max-width:100%; min-height:44px; padding:12px 20px; line-height:1.4; text-align:center; text-decoration:none; white-space:normal; }
+#assessment #googleFormLink:hover { transform:none; }
+#assessment #googleFormInfo { display:block; margin:0!important; line-height:1.55; }
+@media(max-width:480px){#assessment .assessment-form-card{padding:20px}#assessment #googleFormLink{width:100%;}}

@@ -1,0 +1,1 @@
+StudyFlow V11 — Correção de acesso ao perfil. A V10 retornava um objeto vazio quando não havia cadastro e o carregamento tentava ler disciplinas inexistentes. Agora o perfil sempre recebe valores padrão. A navegação troca de tela antes de carregar o perfil e trata possíveis erros sem bloquear o menu. Dados existentes e outras funções são preservados.

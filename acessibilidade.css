@@ -1,0 +1,57 @@
+/* StudyFlow V23 — melhorias incrementais de acessibilidade. */
+.skip-link{position:fixed;left:14px;top:-100px;z-index:100000;background:#fff;color:#122249;border:3px solid #0953f5;border-radius:10px;padding:12px 18px;font-weight:800}
+.skip-link:focus{top:12px}
+:where(a,button,input,textarea,select,[tabindex]):focus-visible{outline:3px solid #f5a623!important;outline-offset:3px!important;box-shadow:0 0 0 5px rgba(12,66,153,.36)!important}
+:where(button,a,input,select,textarea){touch-action:manipulation}
+.a11y-trigger{font-size:13px!important;padding:10px 13px!important;background:transparent!important;color:var(--text,#182542)!important;border:1px solid var(--line,#8d9cbb)!important;white-space:nowrap}
+.a11y-panel{position:fixed;z-index:9991;right:18px;top:84px;width:min(370px,calc(100vw - 36px));background:var(--panel,#fff);color:var(--text,#172342);border:2px solid #5279bc;border-radius:18px;box-shadow:0 15px 45px #0c193a55;padding:20px;max-height:calc(100vh - 102px);overflow:auto}
+.a11y-panel[hidden]{display:none!important}.a11y-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.a11y-panel h2{margin:0;font-size:1.25rem}.a11y-panel p{margin:10px 0 17px}.a11y-close{background:transparent;border:1px solid currentColor;border-radius:9px;color:inherit;min-width:40px;min-height:40px;font-size:25px}.a11y-panel fieldset{border:1px solid #8f9bb8;padding:12px;border-radius:11px}.a11y-panel legend{font-weight:700}.a11y-choice{display:flex;gap:6px;flex-wrap:wrap}.a11y-choice button{font:inherit;border:1px solid #8091b7;background:transparent;color:inherit;border-radius:9px;padding:10px;min-width:75px}.a11y-choice button[aria-pressed="true"]{background:#0953f5;color:#fff;border-color:#0953f5}.a11y-toggle{display:flex;align-items:center;gap:12px;padding:13px 0;font-weight:650}.a11y-toggle input{width:21px;height:21px;accent-color:#0953f5}.a11y-hint{font-size:13px;line-height:1.5}
+/* Escalonamento progressivo que preserva as dimensões em rem/em. */
+html[data-a11y-font="125"]{font-size:125%!important}html[data-a11y-font="150"]{font-size:150%!important}
+html[data-a11y-font="125"] .main,html[data-a11y-font="150"] .main{min-width:0}html[data-a11y-font="125"] .top,html[data-a11y-font="150"] .top{flex-wrap:wrap;gap:16px}
+html[data-a11y-font="125"] .top-actions,html[data-a11y-font="150"] .top-actions{flex-wrap:wrap}
+html[data-a11y-font="125"] .two-col,html[data-a11y-font="150"] .two-col{grid-template-columns:minmax(0,1fr)!important}
+html[data-a11y-font="150"] .stats{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important}
+/* Alto contraste deliberadamente independente dos temas claro e escuro. */
+html[data-a11y-contrast="true"] body,html[data-a11y-contrast="true"] .main{background:#090f20!important;color:#fff!important}
+html[data-a11y-contrast="true"] .sidebar,html[data-a11y-contrast="true"] .panel,html[data-a11y-contrast="true"] .stat,html[data-a11y-contrast="true"] .card,html[data-a11y-contrast="true"] .a11y-panel,html[data-a11y-contrast="true"] .profile-card,html[data-a11y-contrast="true"] .notice,html[data-a11y-contrast="true"] .cat-note{background:#131f39!important;color:#fff!important;border-color:#8daee9!important}
+html[data-a11y-contrast="true"] :is(h1,h2,h3,h4,p,label,small,strong,.minor,.metric,.eyebrow,.profile strong,.profile small,.stat strong,.task-info strong,.task-info small,.section-intro p,.panel-head p){color:#fff!important;opacity:1!important}
+html[data-a11y-contrast="true"] :is(input,select,textarea){background:#fff!important;color:#101e3b!important;border:2px solid #0b54d7!important}
+html[data-a11y-contrast="true"] :is(.nav.active,.btn.primary,.a11y-choice button[aria-pressed="true"]){background:#0b54d7!important;color:#fff!important}
+html[data-a11y-contrast="true"] :is(.btn.ghost,.btn.outline,.link){background:#192e51!important;color:#fff!important;border:1px solid #d7e7ff!important}
+html[data-a11y-contrast="true"] .hero{background:linear-gradient(105deg,#182d58,#163767)!important;color:#fff!important}
+html[data-a11y-contrast="true"] .hero :is(h2,p){color:#fff!important}
+html[data-a11y-contrast="true"] .calendar-day,html[data-a11y-contrast="true"] .day,html[data-a11y-contrast="true"] .task-line{border-color:#a1c0ec!important}
+html[data-a11y-contrast="true"] :is(.tag,.chip){color:#0b1833!important;background:#fff3ca!important}
+html[data-a11y-motion="reduce"] *,html[data-a11y-motion="reduce"] *::before,html[data-a11y-motion="reduce"] *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+@media(max-width:900px){.a11y-trigger{padding:9px!important}.top-actions{flex-wrap:wrap}.a11y-panel{top:70px}.stats{grid-template-columns:repeat(auto-fit,minmax(min(100%,175px),1fr))}}
+@media(max-width:650px){.a11y-trigger{font-size:12px!important}.a11y-panel{right:8px;width:calc(100vw - 16px)}.sidebar{max-width:100%}}
+
+/* V24 — Configurações reunidas no menu lateral, acima do perfil. */
+.settings-entry{display:flex;align-items:center;gap:11px;width:100%;min-height:44px;padding:10px 12px;margin:0 0 8px;border:1px solid var(--line,#c8d8f4);border-radius:12px;background:transparent;color:var(--text,#1c2e51);font-size:13px;font-weight:750;text-align:left;cursor:pointer}
+.settings-entry:hover,.settings-entry[aria-expanded="true"]{background:rgba(24,85,216,.12)}
+.settings-entry>span:first-child{font-size:20px;line-height:1}
+.a11y-panel{left:270px;right:auto;top:auto;bottom:18px;max-height:calc(100dvh - 36px)}
+.settings-theme{margin-bottom:14px!important}.settings-theme label{margin:7px 0 5px;font-size:13px}.settings-theme select{width:100%;min-height:43px}.settings-theme .a11y-hint{margin:8px 0 0}
+html[data-a11y-contrast="true"] .settings-entry{color:#fff!important;border-color:#a1b9e8!important;background:#172e4a!important}
+@media(max-width:1050px){.sidebar-bottom{display:block!important}.sidebar-bottom .cat-note,.sidebar-bottom .notice,.sidebar-bottom .profile-entry{display:none!important}.settings-entry{justify-content:center;padding:10px 4px}.settings-label{display:none}.a11y-panel{left:83px;bottom:12px}}
+@media(max-width:720px){.sidebar-bottom{margin:0 0 0 6px}.settings-entry{width:44px;margin:0;flex-shrink:0}.a11y-panel{left:8px;right:8px;bottom:8px;width:auto;max-height:calc(100dvh - 16px)}}
+
+
+/* V25 — Ampliação proporcional de toda a interface, incluindo px fixos. */
+html[data-a11y-font="125"],html[data-a11y-font="150"]{font-size:100%!important}
+body{--sf-ui-scale:1;zoom:var(--sf-ui-scale)}
+html[data-a11y-font="125"] body{--sf-ui-scale:1.25}
+html[data-a11y-font="150"] body{--sf-ui-scale:1.50}
+/* Configurações centrais, acessíveis a partir de todas as páginas. */
+.a11y-panel{position:fixed!important;top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;transform:translate(-50%,-50%)!important;width:min(390px,calc(100vw - 32px))!important;max-height:85vh!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-gutter:stable;z-index:99999!important;padding:20px!important}
+.a11y-panel .a11y-panel-head{position:sticky;top:-20px;background:var(--panel,#fff);padding:6px 0 10px;z-index:2}
+.a11y-panel fieldset{min-width:0;margin:12px 0}
+.a11y-panel .a11y-choice button{min-height:44px}
+.a11y-panel .a11y-hint{overflow-wrap:anywhere}
+/* Permite navegar pelo calendário ampliado sem cortar os sete dias. */
+html[data-a11y-font="125"] .calendar,html[data-a11y-font="150"] .calendar,
+html[data-a11y-font="125"] .calendar-grid,html[data-a11y-font="150"] .calendar-grid{overflow-x:auto;max-width:100%}
+html[data-a11y-font="150"] .sidebar{min-width:0}
+@media(max-width:750px){.a11y-panel{width:calc(100vw - 20px)!important;max-height:82vh!important;padding:14px!important}}

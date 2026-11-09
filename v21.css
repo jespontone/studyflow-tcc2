@@ -1,0 +1,10 @@
+/* V21 — Ações contextualizadas, sem botões duplicados */
+#newTaskTop{display:none!important}
+#tasks .task-page-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+#tasks .task-page-actions .btn{min-height:42px}
+#tasks .task-page-actions .btn.outline{background:var(--surface,#fff);border:1px solid #0c53e9;color:#0c53e9;box-shadow:none}
+#tasks .task-page-actions .btn.outline:hover{background:#e7efff}
+:root[data-mode="dark"] #tasks .task-page-actions .btn.outline{background:#253354;color:#dce8ff;border-color:#739ff7}
+:root[data-mode="dark"] #tasks .task-page-actions .btn.outline:hover{background:#344466}
+@media(prefers-color-scheme:dark){:root[data-mode="auto"] #tasks .task-page-actions .btn.outline{background:#253354;color:#dce8ff;border-color:#739ff7}}
+@media(max-width:720px){#tasks .section-intro{flex-wrap:wrap}#tasks .task-page-actions{width:100%;justify-content:flex-start}#tasks .task-page-actions .btn{flex:1;min-width:145px}}

@@ -1,0 +1,9 @@
+/* V19 — gerenciamento em Minhas atividades */
+.schedule-shortcut{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.schedule-shortcut h3{margin:0 0 5px}
+.schedule-shortcut p{margin:0}
+#sessionsManagement{margin-top:20px;scroll-margin-top:24px}
+#sessionsManagement .panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+#sessionsManagement .panel-head p{margin-top:5px}
+#taskList{min-height:150px}
+@media(max-width:650px){.schedule-shortcut,#sessionsManagement .panel-head{align-items:stretch;flex-direction:column}.schedule-shortcut .btn,#sessionsManagement .panel-head .btn{width:100%}}

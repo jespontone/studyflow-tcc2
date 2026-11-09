@@ -1,0 +1,7 @@
+/* V17: expressões do mascote como feedback contextual. */
+.cat-empty{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;padding:20px 12px!important}
+.cat-empty img{display:block;width:88px;height:88px;object-fit:contain;flex:none}
+.cat-empty span{max-width:310px;line-height:1.5}
+.cat-empty-image{display:block;width:108px;height:108px;object-fit:contain;margin:0 auto 10px}
+#toast .toast-mascot{width:62px;height:62px}
+@media(max-width:600px){.cat-empty img{width:70px;height:70px}}

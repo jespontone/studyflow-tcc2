@@ -1,0 +1,23 @@
+/* V14: correções de contraste e exclusão de perfil */
+.profile-display-heading h2,
+#profileDisplayName {color:#172344!important; opacity:1!important; text-shadow:none!important}
+.profile-display-heading p,#profileDisplayInstitution {color:#52617f!important;opacity:1!important}
+:root[data-mode="dark"] .profile-display-heading h2,
+:root[data-mode="dark"] #profileDisplayName {color:#fff4df!important}
+:root[data-mode="dark"] .profile-display-heading p,
+:root[data-mode="dark"] #profileDisplayInstitution {color:#dce7ff!important}
+@media(prefers-color-scheme:dark){
+ :root[data-mode="auto"] .profile-display-heading h2,
+ :root[data-mode="auto"] #profileDisplayName{color:#fff4df!important}
+ :root[data-mode="auto"] .profile-display-heading p,
+ :root[data-mode="auto"] #profileDisplayInstitution{color:#dce7ff!important}
+}
+#newTaskTop[hidden]{display:none!important}
+.delete-profile-zone{margin-top:22px;padding:18px;border:1px solid #f2bac2;border-radius:16px;background:rgba(255,151,164,.09)}
+.delete-profile-zone h3{color:#b72a48!important;margin:0 0 8px}
+.delete-profile-zone p{font-size:12px;line-height:1.6;margin:0 0 14px;color:inherit!important;opacity:.87}
+.btn-danger{background:#b92d47!important;color:#fff!important;border:1px solid #b92d47!important}
+.btn-danger:hover{background:#9b1f39!important}
+:root[data-mode="dark"] .delete-profile-zone{background:#392b3b;border-color:#98546a}
+:root[data-mode="dark"] .delete-profile-zone h3{color:#ffbac8!important}
+@media(prefers-color-scheme:dark){:root[data-mode="auto"] .delete-profile-zone{background:#392b3b;border-color:#98546a}:root[data-mode="auto"] .delete-profile-zone h3{color:#ffbac8!important}}

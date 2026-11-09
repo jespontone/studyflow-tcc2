@@ -1,0 +1,10 @@
+/* V15: confirmação amigável e acessível com mascote. */
+#toast{z-index:10000;display:none;align-items:center;gap:12px;max-width:min(420px,calc(100vw - 28px));min-height:66px;padding:9px 12px 9px 8px;background:#fff8ea;color:#282337;border:1px solid #f6d88b;border-radius:18px;box-shadow:0 16px 42px #121b3540;font-size:13px;line-height:1.45}
+#toast.toast-success{background:#fff8ea;color:#282337;border-color:#f8d48a}
+#toast.toast-error{background:#23273e;color:#fff;border-color:#656b8f;padding-left:15px}
+#toast .toast-mascot{display:block;width:58px;height:58px;object-fit:contain;flex:none;filter:drop-shadow(0 3px 3px #0002)}
+#toast .toast-text{font-weight:700;flex:1;overflow-wrap:anywhere}
+#toast .toast-close{flex:none;align-self:flex-start;border:0;background:transparent;color:inherit;font-size:22px;line-height:1;padding:0 2px;opacity:.75;cursor:pointer}
+#toast .toast-close:focus-visible{outline:2px solid #0754f8;outline-offset:2px}
+@media(max-width:600px){#toast{right:14px;left:14px;bottom:14px;max-width:none}}
+@media(prefers-reduced-motion:reduce){#toast,#toast *{animation:none!important;transition:none!important}}
