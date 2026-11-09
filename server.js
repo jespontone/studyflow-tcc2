@@ -1,5 +1,5 @@
-// Servidor opcional: Node.js 18+; sem dependências adicionais.
-// Configurar OPENAI_API_KEY no ambiente para habilitar IA.
+// StudyFlow: servidor Node.js 18+ sem dependências adicionais.
+// Configurar GEMINI_API_KEY no Render para habilitar IA. Não expor a chave no frontend.
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const port=Number(process.env.PORT||3000),root=__dirname;
 const uxDir=process.env.DATA_DIR||path.join(root,'private-data');const uxFile=path.join(uxDir,'ux-responses.jsonl');
@@ -48,13 +48,29 @@ const server=http.createServer(async(req,res)=>{
  }
 
  if(req.method==='POST'&&req.url==='/api/recommend'){
-  if(!process.env.OPENAI_API_KEY)return reply(res,503,{error:'API não configurada'});
+  if(!process.env.GEMINI_API_KEY)return reply(res,503,{error:'Gemini não configurado. Defina GEMINI_API_KEY no servidor.'});
   try{let raw='';for await(const chunk of req){raw+=chunk;if(raw.length>6000)return reply(res,413,{error:'Entrada muito grande'})}const {subject,goal,course='',semester=1,subjects=[]}=JSON.parse(raw);if(typeof subject!=='string'||typeof goal!=='string'||subject.length>120||goal.length>500||!subject.trim()||!goal.trim())return reply(res,400,{error:'Dados inválidos'});
    // Busca metadados reais ANTES de gerar orientações; não presume qualidade dos artigos.
    let found=[];
    try {const searchUrl=new URL('https://api.crossref.org/works');searchUrl.searchParams.set('query.bibliographic',subject);searchUrl.searchParams.set('rows','5');const lookup=await fetch(searchUrl,{signal:AbortSignal.timeout(9000),headers:{'User-Agent':'StudyFlow-TCC2/3.0'}});if(lookup.ok){const content=await lookup.json();found=(content.message?.items||[]).filter(x=>typeof x.DOI==='string'&&/^10\.\d{4,9}\//.test(x.DOI)).slice(0,5).map(x=>({title:String(x.title?.[0]||'').slice(0,220),authors:(x.author||[]).slice(0,3).map(a=>[a.given,a.family].filter(Boolean).join(' ')).join(', '),year:x.published?.['date-parts']?.[0]?.[0]||x.issued?.['date-parts']?.[0]?.[0]||null,doi:'https://doi.org/'+encodeURIComponent(x.DOI).replace('%2F','/')}));}}catch{}
-   const response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({model:process.env.OPENAI_MODEL||'gpt-5.5',max_output_tokens:1200,instructions:'Você auxilia universitários em português. Gere um plano breve e realizável de estudos. Indique conceitos, revisão, exercícios e estratégias de verificação. Não invente referências, autores, links ou afirmações de validação de fontes. Sugira buscas em SciELO, CAPES e Google Acadêmico, mas declare que os resultados deverão ser conferidos. Use apenas os metadados fornecidos ao citar estudos, diferenciando metadados de comprovação da qualidade ou relevância do conteúdo. Se as publicações forem pouco relacionadas, declare isso e não as recomende. Não invente DOIs nem URLs. Não solicite dados pessoais.',input:`Disciplina: ${subject}\nObjetivo: ${goal}\nCurso: ${String(course).slice(0,90)}\nSemestre: ${Number(semester)||1}\nDisciplinas cadastradas: ${Array.isArray(subjects)?subjects.slice(0,20).map(x=>String(x).slice(0,70)).join(', '):''}\nMetadados localizados no Crossref (sem avaliação de qualidade): ${JSON.stringify(found)}`})});
-   if(!response.ok){const err=await response.json().catch(()=>({}));const code=err?.error?.code||'';const type=err?.error?.type||'';console.error('Erro OpenAI',response.status,code,type);return reply(res,502,{error:response.status===429?'API com limite ou créditos indisponíveis. Verifique o faturamento.':response.status===401?'Chave da API inválida ou sem permissão.':'Não foi possível consultar a IA. Verifique a configuração do servidor.'});}const result=await response.json();const text=(result.output||[]).filter(i=>i.type==='message').flatMap(i=>i.content||[]).filter(c=>c.type==='output_text').map(c=>c.text).join('\n');return reply(res,200,{text:text||'Não foi possível extrair a resposta.',sources:found});
+   // A API Gemini recebe apenas contexto acadêmico necessário, sem nome, foto ou matrícula.
+   const instructions='Você auxilia estudantes universitários em português brasileiro. Gere um plano de estudos breve, prático e personalizado com revisão, exercícios e verificação de aprendizado. NÃO invente autores, títulos, links, DOIs ou comprovação da qualidade de publicações. Use os metadados fornecidos apenas quando pertinentes ao tema; se não forem relevantes, explique isso. Diferencie recomendações pedagógicas da confiabilidade de fontes. Não solicite dados pessoais.';
+   const prompt=`Disciplina/assunto: ${subject}\nObjetivo: ${goal}\nCurso: ${String(course).slice(0,90)}\nSemestre: ${Number(semester)||1}\nDisciplinas: ${Array.isArray(subjects)?subjects.slice(0,20).map(x=>String(x).slice(0,70)).join(', '):''}\nMetadados do Crossref (não avaliados quanto à qualidade): ${JSON.stringify(found)}`;
+   const model=process.env.GEMINI_MODEL||'gemini-2.5-flash-lite';
+   if(!/^[a-zA-Z0-9._-]+$/.test(model))return reply(res,500,{error:'Modelo Gemini configurado incorretamente'});
+   const endpoint=`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+   const response=await fetch(endpoint,{method:'POST',headers:{'x-goog-api-key':process.env.GEMINI_API_KEY,'Content-Type':'application/json'},signal:AbortSignal.timeout(45000),body:JSON.stringify({systemInstruction:{parts:[{text:instructions}]},contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:1200,temperature:0.35}})});
+   if(!response.ok){
+    const err=await response.json().catch(()=>({}));
+    const code=err?.error?.status||'';
+    console.error('Erro Gemini',response.status,String(code).slice(0,60));
+    const message=response.status===429?'Limite gratuito de solicitações atingido. Tente mais tarde.':response.status===401||response.status===403?'Chave Gemini inválida, bloqueada ou sem permissão.':response.status===404?'Modelo Gemini indisponível para este projeto. Confira GEMINI_MODEL.':'Não foi possível consultar o Gemini agora.';
+    return reply(res,502,{error:message});
+   }
+   const result=await response.json();
+   const generated=(result.candidates||[]).flatMap(c=>c.content?.parts||[]).map(p=>typeof p.text==='string'?p.text:'').filter(Boolean).join('\n').trim();
+   if(!generated)return reply(res,502,{error:'O Gemini não retornou texto para esta solicitação.'});
+   return reply(res,200,{text:generated,sources:found});
   }catch(err){return reply(res,500,{error:'Não foi possível gerar a orientação'})}
  }
  if(req.method==='GET'&&req.url?.startsWith('/api/sources?')){
