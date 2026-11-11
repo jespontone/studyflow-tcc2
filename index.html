@@ -1,5 +1,63 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyFlow • Protótipo TCC2</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="playful.css"><link rel="stylesheet" href="v6.css"><link rel="stylesheet" href="v7.css"><link rel="stylesheet" href="v8.css"><script>try{document.documentElement.dataset.mode=localStorage.getItem("studyflow-color-mode")||"auto"}catch(e){document.documentElement.dataset.mode="auto"}</script><link rel="stylesheet" href="v13.css"><link rel="stylesheet" href="v14.css"><link rel="stylesheet" href="v15.css"><link rel="stylesheet" href="v17.css"><link rel="stylesheet" href="v18.css"><link rel="stylesheet" href="v19.css"><link rel="stylesheet" href="v21.css"><link rel="stylesheet" href="v22.css">
-<link rel="stylesheet" href="acessibilidade.css"><link rel="stylesheet" href="v30.css"></head><body>
+<link rel="stylesheet" href="acessibilidade.css"><link rel="stylesheet" href="v30.css"><style id="studyflow-v31-mobile-styles">
+/* V31: drawer mobile, preserva o menu desktop e reverte os atalhos só com ícones */
+.sf31-menu-toggle,.sf31-overlay{display:none}
+@media(max-width:768px){
+  .sf31-menu-toggle{display:flex!important;align-items:center;justify-content:center;position:fixed;left:14px;top:14px;width:46px;height:46px;z-index:12002;border:1px solid #cbd6ed;border-radius:14px;background:#fff;color:#1b3158;font-size:26px;line-height:1;cursor:pointer;box-shadow:0 5px 18px rgba(10,28,58,.2)}
+  .sf31-menu-toggle[aria-expanded="true"]{left:calc(min(84vw,310px) + 7px);width:42px;height:42px;top:17px}
+  .sf31-overlay:not([hidden]){display:block!important;position:fixed;inset:0;background:rgba(11,23,46,.64);z-index:11998}
+  .shell > .sidebar{display:flex!important;position:fixed!important;left:0!important;top:0!important;right:auto!important;bottom:0!important;flex-direction:column!important;align-items:stretch!important;width:min(84vw,310px)!important;min-width:0!important;max-width:min(84vw,310px)!important;height:100dvh!important;max-height:100dvh!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:12000!important;padding:22px 16px 24px!important;margin:0!important;transform:translateX(-105%)!important;transition:transform .22s ease!important;box-sizing:border-box!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .shell > .sidebar.sf31-open{transform:translateX(0)!important}
+  .shell > .sidebar .brand{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:100%!important;margin:0 0 25px!important;min-height:54px!important;flex-shrink:0!important}
+  .shell > .sidebar .brand > div{display:block!important;min-width:0!important;font-size:20px!important;line-height:1.15!important;white-space:normal!important}
+  .shell > .sidebar .brand small{display:block!important;font-size:10px!important;letter-spacing:0!important;margin-top:4px!important;line-height:1.3!important}
+  .shell > .sidebar .brandicon{display:flex!important;align-items:center!important;justify-content:center!important;flex-shrink:0!important;width:55px!important;height:55px!important;padding:3px!important}
+  .shell > .sidebar .brandicon img{width:100%!important;height:100%!important;object-fit:contain!important}
+  .shell > .sidebar .side-label{display:block!important;margin:4px 8px 13px!important}
+  .shell > .sidebar nav{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;flex:none!important;flex-wrap:nowrap!important;gap:6px!important;width:100%!important;overflow:visible!important;margin:0!important;padding:0!important}
+  .shell > .sidebar nav .nav{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex-direction:row!important;gap:12px!important;text-align:left!important;min-height:47px!important;width:100%!important;flex:0 0 auto!important;padding:12px 13px!important;white-space:normal!important;font-size:15px!important;line-height:1.4!important;box-sizing:border-box!important}
+  .shell > .sidebar nav .nav span{display:inline!important;visibility:visible!important;opacity:1!important;position:static!important;width:auto!important;height:auto!important;overflow:visible!important;white-space:normal!important;flex:1!important;font-size:14px!important}
+  .shell > .sidebar .sidebar-bottom{display:block!important;margin:22px 0 0!important;flex:0 0 auto!important;width:100%!important}
+  .shell > .sidebar .sidebar-bottom .settings-entry{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:11px!important;width:100%!important;min-height:45px!important;margin:0!important;padding:11px 13px!important;text-align:left!important}
+  .shell > .sidebar .sidebar-bottom .settings-label{display:inline!important;font-size:14px!important}
+  .shell > .main{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:78px 15px 45px!important;box-sizing:border-box!important}
+  .shell{display:block!important;max-width:100%!important}
+  body.sf31-menu-open{overflow:hidden!important}
+  .sf31-menu-toggle:focus-visible{outline:3px solid #ffce68!important;outline-offset:3px!important}
+}
+@media(max-width:360px){.sf31-menu-toggle[aria-expanded="true"]{left:calc(min(84vw,310px) + 2px);width:38px}}
+@media(prefers-reduced-motion:reduce){.shell > .sidebar{transition:none!important}}
+html[data-a11y-motion="reduce"] .shell > .sidebar{transition:none!important}
+</style><style id="studyflow-v32-dark-contrast">
+/* StudyFlow V32 — contraste correto na resposta Gemini e Configurações */
+:root[data-mode="dark"] #adviceResult.sf-ai-response,
+:root[data-mode="dark"] #adviceResult.sf-ai-response .sf-ai-prose,
+:root[data-mode="dark"] #adviceResult.sf-ai-response .sf-ai-prose :is(h1,h2,h3,h4,h5,h6,p,li,ul,ol,strong,em,span),
+:root[data-mode="dark"] #adviceResult.sf-ai-response .sf-ai-heading {
+  color: #f2f5ff !important;
+  opacity: 1 !important;
+}
+:root[data-mode="dark"] #adviceResult.sf-ai-response :is(.sf-ai-disclaimer,.sf-paper-disclaimer),
+:root[data-mode="dark"] #advisor .sf-paper-meta {color:#cad5ed !important;}
+:root[data-mode="dark"] #openAccessibility.settings-entry {
+  color:#f2f5ff !important;
+  background:#283650 !important;
+  border-color:#8096c7 !important;
+}
+:root[data-mode="dark"] #openAccessibility.settings-entry :is(span,.settings-label){color:inherit!important;opacity:1!important;}
+:root[data-mode="dark"] #openAccessibility.settings-entry:is(:hover,:focus-visible){background:#364b70 !important;}
+@media (prefers-color-scheme: dark) {
+  :root[data-mode="auto"] #adviceResult.sf-ai-response,
+  :root[data-mode="auto"] #adviceResult.sf-ai-response .sf-ai-prose,
+  :root[data-mode="auto"] #adviceResult.sf-ai-response .sf-ai-prose :is(h1,h2,h3,h4,h5,h6,p,li,ul,ol,strong,em,span),
+  :root[data-mode="auto"] #adviceResult.sf-ai-response .sf-ai-heading {color:#f2f5ff!important;opacity:1!important;}
+  :root[data-mode="auto"] #adviceResult.sf-ai-response :is(.sf-ai-disclaimer,.sf-paper-disclaimer),
+  :root[data-mode="auto"] #advisor .sf-paper-meta {color:#cad5ed!important;}
+  :root[data-mode="auto"] #openAccessibility.settings-entry {color:#f2f5ff!important;background:#283650!important;border-color:#8096c7!important;}
+  :root[data-mode="auto"] #openAccessibility.settings-entry :is(span,.settings-label){color:inherit!important;opacity:1!important;}
+  :root[data-mode="auto"] #openAccessibility.settings-entry:is(:hover,:focus-visible){background:#364b70!important;}
+}
+</style></head><body>
 <a class="skip-link" href="#mainContent">Pular para o conteúdo principal</a>
 <div class="shell"><aside class="sidebar"><div class="brand"><span class="brandicon"><img src="mascote-studyflow.png" alt="Logo do StudyFlow"></span><div>Study<span>Flow</span><small>Seu universo de estudos</small></div></div><div class="side-label">MENU PRINCIPAL</div><nav aria-label="Menu principal"><button class="nav active" data-page="dashboard">◫ <span>Visão geral</span></button><button class="nav" data-page="planner">▦ <span>Meu cronograma</span></button><button class="nav" data-page="tasks">☑ <span>Minhas atividades</span></button><button class="nav" data-page="advisor">✧ <span>Assistente de estudos</span></button><button class="nav" data-page="profile">♙ <span>Meu perfil acadêmico</span></button><button class="nav" data-page="assessment">▤ <span>Avaliação de UX</span></button></nav><div class="sidebar-bottom"><div class="cat-note"><div><strong>Continue firme!</strong><small>Pequenos passos, grandes conquistas 💜</small></div></div><div class="notice"><b>Protótipo acadêmico</b><p>Dados guardados neste navegador. Recomendações com fontes identificadas.</p></div><button type="button" id="openAccessibility" class="settings-entry" aria-controls="accessibilityPanel" aria-expanded="false" aria-label="Abrir configurações de aparência e acessibilidade"><span aria-hidden="true">⚙</span><span class="settings-label">Configurações</span></button><button type="button" class="profile profile-entry" id="openMyProfile" aria-label="Abrir meu perfil acadêmico"><div class="avatar">U</div><div><strong>Estudante</strong><small>Universitário(a)</small></div></button></div></aside>
 <main class="main" id="mainContent" tabindex="-1"><header class="top"><div><span class="eyebrow">PAINEL DO ESTUDANTE</span><h1 id="heading">Seu espaço de estudos</h1></div><div class="top-actions">
@@ -39,190 +97,58 @@
 <p class="a11y-hint">Dica: use Tab para navegar, Enter para ativar botões e Esc para fechar janelas.</p>
 </aside>
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div><link rel="stylesheet" href="v10.css"><script src="form-config.js"></script><script src="app.js"></script><script src="acessibilidade.js"></script>
-<script src="v6.js"></script><script src="assistente-ui.js"></script> 
-
-
-<!-- StudyFlow V31 — Menu lateral responsivo -->
-<style>
-  .sf-mobile-toggle,
-  .sf-mobile-overlay {
-    display: none;
+<script src="v6.js"></script><script src="assistente-ui.js"></script><script id="studyflow-v31-mobile-script">
+(function(){
+  'use strict';
+  var sidebar=document.querySelector('.shell > .sidebar');
+  if(!sidebar || document.querySelector('.sf31-menu-toggle')) return;
+  sidebar.id=sidebar.id || 'sf31-mobile-sidebar';
+  var trigger=document.createElement('button');
+  trigger.type='button';trigger.className='sf31-menu-toggle';trigger.textContent='☰';
+  trigger.setAttribute('aria-label','Abrir menu de navegação');
+  trigger.setAttribute('aria-controls',sidebar.id);
+  trigger.setAttribute('aria-expanded','false');
+  var overlay=document.createElement('div');overlay.className='sf31-overlay';overlay.hidden=true;
+  overlay.setAttribute('aria-hidden','true');
+  document.body.append(trigger,overlay);
+  var query=window.matchMedia('(max-width:768px)');
+  function isOpen(){return sidebar.classList.contains('sf31-open')}
+  function sync(){
+    if(query.matches){if(!isOpen()) sidebar.setAttribute('inert','');}
+    else{sidebar.removeAttribute('inert');close(false);}
   }
-
-  @media (max-width: 768px) {
-    .sf-mobile-toggle {
-      display: flex !important;
-      position: fixed;
-      top: 12px;
-      left: 12px;
-      width: 46px;
-      height: 46px;
-      z-index: 2002;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #d8ddf1;
-      border-radius: 14px;
-      background: #fff;
-      color: #26365b;
-      font-size: 26px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,.12);
-    }
-
-    .sf-mobile-overlay:not([hidden]) {
-      display: block !important;
-      position: fixed;
-      inset: 0;
-      z-index: 1998;
-      background: rgba(13,24,48,.55);
-    }
-
-    .shell > .sidebar {
-      display: flex !important;
-      flex-direction: column !important;
-      position: fixed !important;
-      left: 0 !important;
-      right: auto !important;
-      top: 0 !important;
-      bottom: 0 !important;
-      width: min(85vw, 310px) !important;
-      height: 100dvh !important;
-      max-height: 100dvh !important;
-      overflow-x: hidden !important;
-      overflow-y: auto !important;
-      z-index: 2000 !important;
-      transform: translateX(-110%) !important;
-      transition: transform .25s ease !important;
-      box-sizing: border-box;
-    }
-
-    .shell > .sidebar.sf-open {
-      transform: translateX(0) !important;
-    }
-
-    .shell > .sidebar nav {
-      display: flex !important;
-      flex-direction: column !important;
-      flex-wrap: nowrap !important;
-      overflow: visible !important;
-      width: 100% !important;
-    }
-
-    .shell > .sidebar nav .nav {
-      display: flex !important;
-      width: 100% !important;
-      flex-shrink: 0 !important;
-      white-space: normal !important;
-      text-align: left !important;
-    }
-
-    .shell > .main {
-      width: 100% !important;
-      max-width: 100% !important;
-      margin-left: 0 !important;
-      box-sizing: border-box;
-      padding-top: 70px !important;
-    }
-
-    body.sf-menu-open {
-      overflow: hidden;
-    }
-
-    .sf-mobile-toggle:focus-visible,
-    .shell > .sidebar .nav:focus-visible {
-      outline: 3px solid #8874ee;
-      outline-offset: 3px;
-    }
+  function open(){
+    if(!query.matches)return;
+    sidebar.removeAttribute('inert');sidebar.classList.add('sf31-open');
+    overlay.hidden=false;document.body.classList.add('sf31-menu-open');
+    trigger.textContent='×';trigger.setAttribute('aria-expanded','true');
+    trigger.setAttribute('aria-label','Fechar menu de navegação');
+    var first=sidebar.querySelector('nav .nav');if(first)first.focus();
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .shell > .sidebar {
-      transition: none !important;
-    }
+  function close(restore){
+    sidebar.classList.remove('sf31-open');overlay.hidden=true;
+    document.body.classList.remove('sf31-menu-open');
+    trigger.textContent='☰';trigger.setAttribute('aria-expanded','false');
+    trigger.setAttribute('aria-label','Abrir menu de navegação');
+    if(query.matches)sidebar.setAttribute('inert','');else sidebar.removeAttribute('inert');
+    if(restore)trigger.focus();
   }
-</style>
-
-<script>
-(function () {
-  const sidebar = document.querySelector(".shell > .sidebar");
-  if (!sidebar) return;
-
-  sidebar.id = "studyflowMobileSidebar";
-
-  const toggle = document.createElement("button");
-  toggle.type = "button";
-  toggle.className = "sf-mobile-toggle";
-  toggle.textContent = "☰";
-  toggle.setAttribute("aria-label", "Abrir menu");
-  toggle.setAttribute("aria-expanded", "false");
-  toggle.setAttribute("aria-controls", sidebar.id);
-
-  const overlay = document.createElement("div");
-  overlay.className = "sf-mobile-overlay";
-  overlay.hidden = true;
-  overlay.setAttribute("aria-hidden", "true");
-
-  document.body.append(toggle, overlay);
-
-  function openMenu() {
-    sidebar.classList.add("sf-open");
-    overlay.hidden = false;
-    document.body.classList.add("sf-menu-open");
-
-    toggle.textContent = "×";
-    toggle.setAttribute("aria-label", "Fechar menu");
-    toggle.setAttribute("aria-expanded", "true");
-
-    const firstNav = sidebar.querySelector("nav .nav");
-    if (firstNav) firstNav.focus();
-  }
-
-  function closeMenu(returnFocus = false) {
-    sidebar.classList.remove("sf-open");
-    overlay.hidden = true;
-    document.body.classList.remove("sf-menu-open");
-
-    toggle.textContent = "☰";
-    toggle.setAttribute("aria-label", "Abrir menu");
-    toggle.setAttribute("aria-expanded", "false");
-
-    if (returnFocus) toggle.focus();
-  }
-
-  toggle.addEventListener("click", function () {
-    if (sidebar.classList.contains("sf-open")) {
-      closeMenu(true);
-    } else {
-      openMenu();
+  trigger.addEventListener('click',function(){isOpen()?close(true):open();});
+  overlay.addEventListener('click',function(){close(true);});
+  sidebar.querySelectorAll('nav .nav').forEach(function(btn){btn.addEventListener('click',function(){close(false);});});
+  sidebar.querySelectorAll('#openAccessibility,#openMyProfile').forEach(function(btn){btn.addEventListener('click',function(){close(false);});});
+  document.addEventListener('keydown',function(e){
+    if(!isOpen())return;
+    if(e.key==='Escape'){e.preventDefault();close(true);return;}
+    if(e.key==='Tab'){
+      var controls=Array.from(sidebar.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])'));
+      if(!controls.length)return;
+      var first=controls[0],last=controls[controls.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
     }
   });
-
-  overlay.addEventListener("click", function () {
-    closeMenu(true);
-  });
-
-  sidebar.querySelectorAll("nav .nav").forEach(function (item) {
-    item.addEventListener("click", function () {
-      closeMenu();
-    });
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" &&
-        sidebar.classList.contains("sf-open")) {
-      closeMenu(true);
-    }
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768) {
-      closeMenu();
-    }
-  });
+  if(query.addEventListener)query.addEventListener('change',sync);else window.addEventListener('resize',sync);
+  sync();
 })();
-</script>
-<!-- Fim do menu responsivo V31 -->
-
-
-
-</body></html>
+</script></body></html>
