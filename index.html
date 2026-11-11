@@ -39,4 +39,190 @@
 <p class="a11y-hint">Dica: use Tab para navegar, Enter para ativar botões e Esc para fechar janelas.</p>
 </aside>
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div><link rel="stylesheet" href="v10.css"><script src="form-config.js"></script><script src="app.js"></script><script src="acessibilidade.js"></script>
-<script src="v6.js"></script><script src="assistente-ui.js"></script></body></html>
+<script src="v6.js"></script><script src="assistente-ui.js"></script> 
+
+
+<!-- StudyFlow V31 — Menu lateral responsivo -->
+<style>
+  .sf-mobile-toggle,
+  .sf-mobile-overlay {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .sf-mobile-toggle {
+      display: flex !important;
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      width: 46px;
+      height: 46px;
+      z-index: 2002;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d8ddf1;
+      border-radius: 14px;
+      background: #fff;
+      color: #26365b;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,.12);
+    }
+
+    .sf-mobile-overlay:not([hidden]) {
+      display: block !important;
+      position: fixed;
+      inset: 0;
+      z-index: 1998;
+      background: rgba(13,24,48,.55);
+    }
+
+    .shell > .sidebar {
+      display: flex !important;
+      flex-direction: column !important;
+      position: fixed !important;
+      left: 0 !important;
+      right: auto !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      width: min(85vw, 310px) !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      z-index: 2000 !important;
+      transform: translateX(-110%) !important;
+      transition: transform .25s ease !important;
+      box-sizing: border-box;
+    }
+
+    .shell > .sidebar.sf-open {
+      transform: translateX(0) !important;
+    }
+
+    .shell > .sidebar nav {
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      overflow: visible !important;
+      width: 100% !important;
+    }
+
+    .shell > .sidebar nav .nav {
+      display: flex !important;
+      width: 100% !important;
+      flex-shrink: 0 !important;
+      white-space: normal !important;
+      text-align: left !important;
+    }
+
+    .shell > .main {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: 0 !important;
+      box-sizing: border-box;
+      padding-top: 70px !important;
+    }
+
+    body.sf-menu-open {
+      overflow: hidden;
+    }
+
+    .sf-mobile-toggle:focus-visible,
+    .shell > .sidebar .nav:focus-visible {
+      outline: 3px solid #8874ee;
+      outline-offset: 3px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shell > .sidebar {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const sidebar = document.querySelector(".shell > .sidebar");
+  if (!sidebar) return;
+
+  sidebar.id = "studyflowMobileSidebar";
+
+  const toggle = document.createElement("button");
+  toggle.type = "button";
+  toggle.className = "sf-mobile-toggle";
+  toggle.textContent = "☰";
+  toggle.setAttribute("aria-label", "Abrir menu");
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", sidebar.id);
+
+  const overlay = document.createElement("div");
+  overlay.className = "sf-mobile-overlay";
+  overlay.hidden = true;
+  overlay.setAttribute("aria-hidden", "true");
+
+  document.body.append(toggle, overlay);
+
+  function openMenu() {
+    sidebar.classList.add("sf-open");
+    overlay.hidden = false;
+    document.body.classList.add("sf-menu-open");
+
+    toggle.textContent = "×";
+    toggle.setAttribute("aria-label", "Fechar menu");
+    toggle.setAttribute("aria-expanded", "true");
+
+    const firstNav = sidebar.querySelector("nav .nav");
+    if (firstNav) firstNav.focus();
+  }
+
+  function closeMenu(returnFocus = false) {
+    sidebar.classList.remove("sf-open");
+    overlay.hidden = true;
+    document.body.classList.remove("sf-menu-open");
+
+    toggle.textContent = "☰";
+    toggle.setAttribute("aria-label", "Abrir menu");
+    toggle.setAttribute("aria-expanded", "false");
+
+    if (returnFocus) toggle.focus();
+  }
+
+  toggle.addEventListener("click", function () {
+    if (sidebar.classList.contains("sf-open")) {
+      closeMenu(true);
+    } else {
+      openMenu();
+    }
+  });
+
+  overlay.addEventListener("click", function () {
+    closeMenu(true);
+  });
+
+  sidebar.querySelectorAll("nav .nav").forEach(function (item) {
+    item.addEventListener("click", function () {
+      closeMenu();
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" &&
+        sidebar.classList.contains("sf-open")) {
+      closeMenu(true);
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+})();
+</script>
+<!-- Fim do menu responsivo V31 -->
+
+
+
+</body></html>
