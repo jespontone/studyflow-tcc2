@@ -92,9 +92,9 @@ const server=http.createServer(async(req,res)=>{
  let route;
  try {route=decodeURIComponent((req.url||'/').split('?')[0]);} catch {return reply(res,400,{error:'Caminho invalido'});}
  const publicFiles=new Set([
-  'index.html','app.js','form-config.js','acessibilidade.js','v6.js',
+  'index.html','app.js','form-config.js','acessibilidade.js','v6.js','assistente-ui.js',
   'style.css','playful.css','acessibilidade.css',
-  'v6.css','v7.css','v8.css','v10.css','v13.css','v14.css','v15.css','v17.css','v18.css','v19.css','v21.css','v22.css',
+  'v6.css','v7.css','v8.css','v10.css','v13.css','v14.css','v15.css','v17.css','v18.css','v19.css','v21.css','v22.css','v30.css',
   'gatinho-feliz.png','gatinho-pensativo.png','gatinho-comemorando.png',
   'gatinho-joinha.png','gatinho-preto.jpg','mascote-studyflow.png'
  ]);
